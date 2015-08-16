@@ -1,0 +1,16 @@
+{% load_yaml as rawmap %}
+default:
+    configdir: /etc/mail
+    pkg: opensmtpd
+    service: opensmtpd
+FreeBSD:
+    configdir: /usr/local/etc/mail
+    pkg: opensmtpd
+    service: smtpd
+Debian:
+    configdir: /etc
+    pkg: opensmtpd
+    service: opensmtpd
+{% endload %}
+{% set opensmtpd = salt['grains.filter_by'](rawmap, grain='os_family',
+        merge=salt['pillar.get']('opensmtpd:lookup')) %}
