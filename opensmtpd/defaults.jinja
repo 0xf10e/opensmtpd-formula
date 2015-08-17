@@ -11,11 +11,28 @@ default:
             type: accept
             for: local
             alias: '<aliases>'
-            deliver: mbox
+            deliver_to: mbox
         reject anything not from localhost:
             type: reject
             from: '! local'
             for: any
+RedHat:
+    listen_on:
+        - localhost
+    tables:
+        aliases:
+            path: /etc/aliases
+            type: file
+    rules:
+        accept for local (w/ aliases) to mbox:
+            type: accept
+            for: local
+            aliases: '<aliases>'
+            deliver_to: mbox
+        accept for any and relay:
+            type: accept
+            for: any
+            relay:
 {% endload %}
 {% set defaults = salt['grains.filter_by'](rawmap, grain='os_family',
         merge=salt['pillar.get']('opensmtpd:defaults')) %}
