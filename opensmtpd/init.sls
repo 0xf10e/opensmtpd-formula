@@ -13,6 +13,8 @@ opensmtpd:
         - enable: True
         - require:
             - file: smtpd.conf
+        - watch:
+            - file: smtpd.conf
 
 smtpd.conf:
     file.managed:
