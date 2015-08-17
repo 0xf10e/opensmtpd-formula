@@ -1,18 +1,21 @@
 {% load_yaml as rawmap %}
 default:
+    listen_on:
+        - lo0
     tables:
-        secrets: 
-            type: inline
-            entries:
-                user1: "'$2a$06$hIJ4QfMcp.90nJwKqGbKM.MybArjHOTpEtoTV.DgLYAiThuoYmTSe'"
-                user2: "'$2a$06$bwSmUOBGcZGamIfRuXGTvuTo3VLbPG9k5yeKNMBtULBhksV5KdGsK'"
         aliases:
             path: aliases
-            type: file 
-            entries:
-                user1: otheruser 
-                user2: otheruser1,otheruser2 
-                user3: otheruser@example.com
+            type: file
+    rules:
+        local (w/ aliases) to mboxes:
+            type: accept
+            for: local
+            alias: '<aliases>'
+            deliver: mbox
+        reject anything not from localhost:
+            type: reject
+            from: '! local'
+            for: any
 {% endload %}
 {% set defaults = salt['grains.filter_by'](rawmap, grain='os_family',
         merge=salt['pillar.get']('opensmtpd:defaults')) %}
