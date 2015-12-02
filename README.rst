@@ -2,8 +2,10 @@
 OpenSMTPD
 =========
 
-Install OpenSMTPD via the OS' package management
-and generate configuration files.
+Install OpenSMTPD via the OS' package management,
+generate configuration file, start service.
+
+Tested for relay-only setup on FreeBSD.
 
 .. note::
 
@@ -20,7 +22,7 @@ Available states
 -------------
 
 Runs the states to install OpenSMTPD, creates the configuration
-file and additional files for aliases and virtual users.
+file and starts the service.
 
 .. note::
 
