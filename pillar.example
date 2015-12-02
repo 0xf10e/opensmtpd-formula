@@ -1,0 +1,26 @@
+opensmtpd:
+    # The default value for this formula:
+    listen_on: localhost
+
+    tables:
+        # That's a table called "aliases",
+        # again from the formulas defaults:
+        aliases:
+            type: file
+            path: /etc/aliases
+            
+    # Careful, rules are currently 
+    # sorted by their description!
+    rules:
+        1st local (w/ aliases) to mboxes:
+            type: accept
+            for: local
+            alias: '<aliases>'
+            deliver_to: mbox
+        2nd accept for @example.com and relay:
+            type: accept
+            for: domain example.com
+            relay: mail.example.com
+            hostname: thishost.example.com
+        # The default for anything not 
+        # matching is "reject".
