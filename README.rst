@@ -5,7 +5,9 @@ OpenSMTPD
 Install OpenSMTPD via the OS' package management,
 generate configuration file, start service.
 
-Tested for relay-only setup on FreeBSD.
+Tested with OpenSMTPD 5.7.3 in relay-only config on:
+  - FreeBSD 10.2
+  - CentOS 6.7
 
 .. note::
 

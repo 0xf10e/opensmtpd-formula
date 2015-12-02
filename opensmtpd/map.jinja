@@ -11,6 +11,10 @@ Debian:
     configdir: /etc
     pkg: opensmtpd
     service: opensmtpd
+RedHat:
+    configdir: /etc/opensmtpd
+    pkg: opensmtpd
+    service: opensmtpd
 {% endload %}
 {% set opensmtpd = salt['grains.filter_by'](rawmap, grain='os_family',
         merge=salt['pillar.get']('opensmtpd:lookup')) %}
